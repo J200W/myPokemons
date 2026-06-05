@@ -5,7 +5,17 @@
 
     <search-pokemon></search-pokemon>
 
-    @if (pokemons) {
+    @if (pokemonsLoaded) {
+    <pokemon-filter-bar
+        [availableTypes]="availableTypes"
+        (criteriaChange)="onCriteriaChange($event)">
+    </pokemon-filter-bar>
+
+    <p class="filter-result-count center">
+        {{ displayedPokemons.length }} Pokémon affiché{{ displayedPokemons.length > 1 ? 's' : '' }}
+        sur {{ allPokemons.length }}
+    </p>
+
     <div class="actions-bar section">
         <a routerLink="/pokemon/add" class="btn waves-effect waves-light btn-nintendo">
             <i class="material-icons left">add</i>Ajouter un Pokémon
@@ -21,9 +31,12 @@
         </a>
     </div>
 
+    @if (displayedPokemons.length) {
     <div class="row">
-        @for (pokemon of pokemons; track pokemon.id) {
-        <div class="col s6 m4">
+        @for (pokemon of displayedPokemons; track pokemon.id; let i = $index) {
+        <div class="col s6 m4 pokemon-card-col"
+            animate.enter="pokemon-card-bounce"
+            [style.animation-delay.ms]="i * 75">
             <pkmnBorderCard class="card horizontal"
                 [selected]="selectMode && isSelected(pokemon.id)"
                 (click)="onCardClick(pokemon)">
@@ -45,5 +58,8 @@
         </div>
         }
     </div>
+    } @else {
+    <p class="center auth-hint">Aucun Pokémon ne correspond à ces filtres.</p>
+    }
     }
 </div>

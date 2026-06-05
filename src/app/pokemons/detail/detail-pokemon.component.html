@@ -3,16 +3,20 @@
     <div class="col s12 m10 offset-m1">
         <div class="row section">
             <div class="col s6 left-align">
-                <button (click)="goTo(pokemon.id - 1)"
+                @if (previousId) {
+                <button (click)="goToPrevious()"
                     class="btn waves-effect waves-light btn-nintendo">
                     <i class="material-icons left">chevron_left</i>Précédent
                 </button>
+                }
             </div>
             <div class="col s6 right-align">
-                <button (click)="goTo(pokemon.id + 1)"
+                @if (nextId) {
+                <button (click)="goToNext()"
                     class="btn waves-effect waves-light btn-nintendo">
                     Suivant<i class="material-icons right">chevron_right</i>
                 </button>
+                }
             </div>
         </div>
         <div class="page-header">

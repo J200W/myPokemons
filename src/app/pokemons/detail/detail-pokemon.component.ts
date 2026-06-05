@@ -17,8 +17,9 @@ import { AuthService } from "../../core/auth.service";
 })
 export class DetailPokemonComponent implements OnInit {
 
-    //variable qui va récupérer le pokemon sélectionné
-    pokemon: any = null;
+    pokemon: Pokemon | null = null;
+    previousId: number | null = null;
+    nextId: number | null = null;
 
     constructor(
         private route: ActivatedRoute,
@@ -44,25 +45,52 @@ export class DetailPokemonComponent implements OnInit {
         if (!id) {
             return;
         }
-        this.pokemonsService.getPokemon(id).subscribe((pokemon) => this.pokemon = pokemon);
+
+        this.pokemonsService.getPokemon(id).subscribe((pokemon) => {
+            if (!pokemon) {
+                this.pokemon = null;
+                this.previousId = null;
+                this.nextId = null;
+                return;
+            }
+
+            this.pokemon = pokemon;
+            this.loadAdjacentIds(pokemon.id);
+        });
+    }
+
+    // Charge les identifiants des pokémons précédent et suivant
+    // en fonction de l'identifiant du pokémon courant
+    private loadAdjacentIds(id: number) {
+        this.pokemonsService.getAdjacentPokemonIds(id).subscribe(({ previousId, nextId }) => {
+            this.previousId = previousId;
+            this.nextId = nextId;
+        });
     }
 
     goBack() {
         this.router.navigate(['/pokemon/all']);
     }
 
-    goTo(id: number) {
-        this.router.navigate(['/pokemon', id]);
+    goToPrevious() {
+        if (this.previousId) {
+            this.router.navigate(['/pokemon', this.previousId]);
+        }
+    }
+
+    goToNext() {
+        if (this.nextId) {
+            this.router.navigate(['/pokemon', this.nextId]);
+        }
     }
 
     goEdit(pokemon: Pokemon) {
-        let link = ['/pokemon/edit', pokemon.id];
-        this.router.navigate(link);
+        this.router.navigate(['/pokemon/edit', pokemon.id]);
     }
 
     deletePokemon(pokemon: Pokemon) {
         if (confirm(`Voulez-vous vraiment supprimer ${pokemon.name} ?`)) {
-            this.pokemonsService.deletePokemon(Number(pokemon.id).toString()).subscribe((pokemon) => {
+            this.pokemonsService.deletePokemon(Number(pokemon.id).toString()).subscribe(() => {
                 this.goBack();
             });
         }
@@ -75,7 +103,9 @@ export class DetailPokemonComponent implements OnInit {
         }
 
         this.pokemonsService.toggleFavorite(pokemon.id).subscribe((isFavorite) => {
-            this.pokemon.isFavorite = isFavorite;
+            if (this.pokemon) {
+                this.pokemon.isFavorite = isFavorite;
+            }
         });
     }
 }

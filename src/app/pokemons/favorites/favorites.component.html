@@ -3,10 +3,23 @@
         <h1>Pokémons favoris</h1>
     </div>
 
-    @if (pokemons) {
+    @if (pokemonsLoaded && allPokemons.length) {
+    <pokemon-filter-bar
+        [availableTypes]="availableTypes"
+        (criteriaChange)="onCriteriaChange($event)">
+    </pokemon-filter-bar>
+
+    <p class="filter-result-count center">
+        {{ displayedPokemons.length }} favori{{ displayedPokemons.length > 1 ? 's' : '' }} affiché{{ displayedPokemons.length > 1 ? 's' : '' }}
+        sur {{ allPokemons.length }}
+    </p>
+
+    @if (displayedPokemons.length) {
     <div class="row">
-        @for (pokemon of pokemons; track pokemon.id) {
-        <div class="col s6 m4">
+        @for (pokemon of displayedPokemons; track pokemon.id; let i = $index) {
+        <div class="col s6 m4 pokemon-card-col"
+            animate.enter="pokemon-card-bounce"
+            [style.animation-delay.ms]="i * 75">
             <pkmnBorderCard class="card horizontal" (click)="selectPokemon(pokemon)">
 
                 <div class="card-image">
@@ -27,6 +40,9 @@
         }
     </div>
     } @else {
+    <p class="center auth-hint">Aucun favori ne correspond à ces filtres.</p>
+    }
+    } @else if (pokemonsLoaded) {
     <p class="center auth-hint">Aucun favori pour le moment.</p>
     }
 </div>

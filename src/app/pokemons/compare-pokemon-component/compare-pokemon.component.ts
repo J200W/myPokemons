@@ -29,8 +29,16 @@ export class ComparePokemonComponent implements OnInit {
             const p1 = Number(params.get('p1'));
             const p2 = Number(params.get('p2'));
 
-            this.pokemonsService.getPokemon(p1).subscribe((pokemon) => this.pokemon1 = pokemon);
-            this.pokemonsService.getPokemon(p2).subscribe((pokemon) => this.pokemon2 = pokemon);
+            this.pokemonsService.getPokemon(p1).subscribe((pokemon) => {
+                if (pokemon) {
+                    this.pokemon1 = pokemon;
+                }
+            });
+            this.pokemonsService.getPokemon(p2).subscribe((pokemon) => {
+                if (pokemon) {
+                    this.pokemon2 = pokemon;
+                }
+            });
         });
     }
 

@@ -6,27 +6,55 @@ import { BorderCardDirective } from "../directives/border-card.directive";
 import { Router, RouterLink } from "@angular/router";
 import { PokemonsService } from "../pokemons.service";
 import { SearchPokemonComponent } from "../search-pokemons/search-pokemons.component";
+import { PokemonFilterBarComponent } from "./pokemon-filter-bar.component";
+import {
+    PokemonListCriteria,
+    collectPokemonTypes,
+    defaultPokemonListCriteria,
+    filterAndSortPokemons,
+} from "../utils/pokemon-list-filter.util";
 
 @Component({
     standalone: true,
     selector: 'list-pokemons',
     templateUrl: './pokemons.component.html',
-    imports: [DatePipe, PokemonTypeColor, BorderCardDirective, SearchPokemonComponent, RouterLink]
+    imports: [
+        DatePipe,
+        PokemonTypeColor,
+        BorderCardDirective,
+        SearchPokemonComponent,
+        RouterLink,
+        PokemonFilterBarComponent,
+    ],
 })
 export class PokemonsComponent implements OnInit {
 
-    pokemons: Pokemon[];
+    allPokemons: Pokemon[] = [];
+    displayedPokemons: Pokemon[] = [];
+    availableTypes: string[] = [];
+    pokemonsLoaded = false;
     selectMode = false;
     selectedIds: number[] = [];
+    private criteria: PokemonListCriteria = { ...defaultPokemonListCriteria };
 
-    constructor(private router: Router, private pokemonService: PokemonsService) {
-        this.pokemons = [];
-    }
+    constructor(private router: Router, private pokemonService: PokemonsService) {}
 
     ngOnInit(): void {
         this.pokemonService.getPokemons().subscribe((pokemons) => {
-            this.pokemons = pokemons
+            this.allPokemons = pokemons;
+            this.availableTypes = collectPokemonTypes(pokemons);
+            this.applyFilterAndSort();
+            this.pokemonsLoaded = true;
         });
+    }
+
+    onCriteriaChange(criteria: PokemonListCriteria) {
+        this.criteria = criteria;
+        this.applyFilterAndSort();
+    }
+
+    private applyFilterAndSort() {
+        this.displayedPokemons = filterAndSortPokemons(this.allPokemons, this.criteria);
     }
 
     selectPokemon(pokemon: Pokemon) {

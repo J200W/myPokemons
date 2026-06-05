@@ -172,7 +172,6 @@ h1, h2, h3, h4, h5, h6,
 .card-panel {
   border-radius: var(--nintendo-radius) !important;
   box-shadow: var(--nintendo-shadow) !important;
-  border: 1px solid rgba(255, 255, 255, 0.8);
   overflow: hidden;
 }
 
@@ -188,7 +187,6 @@ h1, h2, h3, h4, h5, h6,
 
 .card .card-image img {
   object-fit: contain;
-  background: var(--nintendo-gray-100);
   padding: 0.5rem;
 }
 
@@ -232,7 +230,7 @@ table.bordered.striped tbody tr td:first-child {
 }
 
 .nintendo-search .collection-item {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 0.75rem;
   cursor: pointer;
@@ -374,7 +372,6 @@ table.bordered.striped tbody tr td:first-child {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.15);
   border-radius: 999px;
   padding: 0 1rem !important;
   font-weight: 600;
@@ -428,6 +425,10 @@ table.bordered.striped tbody tr td:first-child {
   border-radius: var(--nintendo-radius-sm) !important;
 }
 
+.form-group input {
+    box-sizing: border-box !important;
+}
+
 /* --- Actions bar liste --- */
 
 .actions-bar {
@@ -448,4 +449,269 @@ table.bordered.striped tbody tr td:first-child {
   background: var(--nintendo-white);
   padding: 1rem;
   box-shadow: var(--nintendo-shadow);
+}
+
+/* --- Tri et filtres (fonction individuelle) --- */
+
+.filter-bar {
+  border-top: 4px solid var(--nintendo-blue);
+  margin-bottom: 1rem;
+}
+
+.filter-bar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.filter-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--nintendo-gray-900);
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100px;
+  min-width: 140px;
+}
+
+.filter-field-direction {
+  flex: 0 1 260px;
+}
+
+.filter-bar label {
+  display: block;
+  font-weight: 700;
+  color: var(--nintendo-gray-700);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.filter-select {
+  width: 100%;
+  border: 2px solid var(--nintendo-gray-200);
+  border-radius: var(--nintendo-radius-sm);
+  padding: 0.5rem 0.75rem;
+  height: 2.75rem;
+  background: var(--nintendo-white);
+  font-family: var(--font-body);
+}
+
+.filter-direction-btn {
+  width: 100%;
+  margin: 0;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  padding: 0 1rem;
+}
+
+.filter-direction-btn .material-icons {
+  line-height: 2.75rem;
+}
+
+.btn-nintendo-reset,
+.filter-reset-btn {
+  color: var(--nintendo-red) !important;
+  font-weight: 700;
+  text-transform: none;
+  flex: 0 0 auto;
+  margin: 0;
+  height: 2.75rem;
+  line-height: 2.75rem;
+}
+
+.filter-types {
+  margin-top: 1rem;
+}
+
+.filter-type-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-type-chip {
+  border: 2px solid transparent;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.filter-type-chip:hover {
+  transform: translateY(-1px);
+}
+
+.filter-type-chip-active {
+  border-color: var(--nintendo-red);
+  box-shadow: 0 0 0 2px var(--nintendo-red-soft);
+}
+
+.filter-type-chip .chip {
+  margin: 0;
+  cursor: pointer;
+}
+
+.filter-hint,
+.filter-result-count {
+  color: var(--nintendo-gray-700);
+  font-size: 0.95rem;
+}
+
+.filter-hint {
+  margin: 0.75rem 0 0;
+}
+
+.filter-result-count {
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-field,
+  .filter-field-direction {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+}
+
+.filter-result-count {
+  margin: 0 0 1rem;
+  font-weight: 700;
+}
+
+/* --- Cartes Pokémon : animate.enter (CSS pur) --- */
+
+.pokemon-card-bounce {
+  animation: pokemon-card-bounce 520ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pokemon-card-bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) translateY(28px);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.12) translateY(0);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.94) translateY(0);
+  }
+  85% {
+    opacity: 1;
+    transform: scale(1.04) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pokemon-card-bounce {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Transitions entre pages (View Transitions API + Angular)
+   ============================================================ */
+
+.nintendo-nav,
+.nintendo-footer {
+  view-transition-name: none;
+}
+
+.page-transition-host {
+  view-transition-name: page-content;
+  min-height: inherit;
+  position: relative;
+}
+
+@keyframes page-shrink-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes page-grow-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+::view-transition-group(page-content) {
+  animation-duration: 0s;
+  overflow: visible;
+}
+
+::view-transition-image-pair(page-content) {
+  isolation: isolate;
+}
+
+::view-transition-old(page-content),
+::view-transition-new(page-content) {
+  transform-origin: center center;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(page-content) {
+  animation: 280ms cubic-bezier(0.4, 0, 0.6, 1) both page-shrink-out;
+  z-index: 1;
+}
+
+::view-transition-new(page-content) {
+  animation: 320ms cubic-bezier(0.2, 0, 0.2, 1) 60ms both page-grow-in;
+  z-index: 2;
+}
+
+html.route-transitioning pkmnBorderCard,
+html.route-transitioning .card.hoverable,
+html.route-transitioning .btn,
+html.route-transitioning .pokemon-card-col {
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+html.route-transitioning .btn:hover {
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(page-content),
+  ::view-transition-old(page-content),
+  ::view-transition-new(page-content) {
+    animation: none !important;
+  }
 }

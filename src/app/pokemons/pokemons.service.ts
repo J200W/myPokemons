@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Pokemon } from './donnees/pokemon';
 import { AuthService } from '../core/auth.service';
 import { SupabaseService } from '../core/supabase.service';
-import { catchError, map, Observable, of, from, tap, switchMap } from 'rxjs';
+import { catchError, forkJoin, map, Observable, of, from, tap, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PokemonsService {
@@ -65,7 +65,42 @@ export class PokemonsService {
         );
     }
 
-    getPokemon(id: number): Observable<Pokemon> {
+    /**
+     * Retourne les ids du Pokémon précédent et suivant réellement en base
+     * (tri par id), sans supposer que les ids sont consécutifs (ex. 1, 2, 5, 9).
+     * Utilisé par les boutons Précédent / Suivant de la page détail.
+     */
+    getAdjacentPokemonIds(id: number): Observable<{ previousId: number | null; nextId: number | null }> {
+        const client = this.supabaseService.getClient();
+
+        const previous$ = from(
+            client.from('pokemons').select('id').lt('id', id).order('id', { ascending: false }).limit(1).maybeSingle()
+        ).pipe(
+            map(({ data, error }) => {
+                if (error) {
+                    throw error;
+                }
+                return data?.id ?? null;
+            })
+        );
+
+        const next$ = from(
+            client.from('pokemons').select('id').gt('id', id).order('id', { ascending: true }).limit(1).maybeSingle()
+        ).pipe(
+            map(({ data, error }) => {
+                if (error) {
+                    throw error;
+                }
+                return data?.id ?? null;
+            })
+        );
+
+        return forkJoin({ previousId: previous$, nextId: next$ }).pipe(
+            catchError(this.handleError('getAdjacentPokemonIds', { previousId: null, nextId: null }))
+        );
+    }
+
+    getPokemon(id: number): Observable<Pokemon | null> {
         return from(
             this.supabaseService.getClient().from('pokemons').select('*').eq('id', id).single()
         ).pipe(
@@ -84,7 +119,7 @@ export class PokemonsService {
                 );
             }),
             tap(_ => this.log(`fetched pokemon id=${id}`)),
-            catchError(this.handleError<Pokemon>(`getPokemon id=${id}`))
+            catchError(this.handleError<Pokemon | null>(`getPokemon id=${id}`, null))
         );
     }
 

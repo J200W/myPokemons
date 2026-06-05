@@ -1,0 +1,48 @@
+<div class="filter-bar card-panel">
+    <div class="filter-bar-header">
+        <h3 class="filter-title">Tri et filtres</h3>
+        @if (hasActiveFilters) {
+        <button type="button" class="btn-flat btn-nintendo-reset filter-reset-btn" (click)="resetFilters()">
+            Réinitialiser
+        </button>
+        }
+    </div>
+
+    <div class="filter-controls">
+        <div class="filter-field">
+            <label for="sortBy">Trier par</label>
+            <select id="sortBy" class="browser-default filter-select"
+                [(ngModel)]="criteria.sortBy" (ngModelChange)="onSortChange()">
+                @for (option of sortOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+                }
+            </select>
+        </div>
+
+        <div class="filter-field filter-field-direction">
+            <label>Ordre</label>
+            <button type="button" class="btn waves-effect waves-light btn-nintendo-secondary filter-direction-btn"
+                (click)="toggleSortDirection()">
+                <i class="material-icons left">{{ criteria.sortDirection === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</i>
+                {{ sortDirectionLabel }}
+            </button>
+        </div>
+    </div>
+
+    @if (availableTypes.length) {
+    <div class="filter-types">
+        <label>Filtrer par type</label>
+        <div class="filter-type-chips">
+            @for (type of availableTypes; track type) {
+            <button type="button"
+                class="filter-type-chip"
+                [class.filter-type-chip-active]="isTypeSelected(type)"
+                (click)="toggleType(type)">
+                <span class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+            </button>
+            }
+        </div>
+        <p class="filter-hint">Aucun type sélectionné = tous les Pokémon affichés.</p>
+    </div>
+    }
+</div>
