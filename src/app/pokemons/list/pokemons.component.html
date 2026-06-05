@@ -1,0 +1,59 @@
+<h1 class="center">Liste de pokémons</h1>
+
+
+<search-pokemon></search-pokemon>
+
+@if (pokemons) {
+    
+<div class="container">
+    <div class="row section">
+        <div class="col s12 m6">
+            <a routerLink="/pokemon/add" class="btn waves-effect waves-light teal darken-2">
+                <i class="material-icons left">add</i>Ajouter un pokemon
+            </a>
+        </div>
+        <div class="col s12 m3">
+            <button type="button" (click)="toggleSelectMode()"
+                class="btn waves-effect waves-light blue darken-2"
+                [class.pulse]="selectMode">
+                <i class="material-icons left">compare</i>
+                {{ selectMode ? 'Annuler' : 'Comparer' }}
+            </button>
+        </div>
+        <div class="col s12 m3">
+            <a routerLink="/pokemon/favorites" type="button" id="btn-liste-favoris" class="btn waves-effect waves-light amber darken-2">
+                <i class="material-icons left">favorite</i>Liste des favoris
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        @for (pokemon of pokemons; track pokemon.id) {
+        <div class="col s6 m4">
+            <pkmnBorderCard class="card horizontal"
+                [selected]="selectMode && isSelected(pokemon.id)"
+                (click)="onCardClick(pokemon)">
+
+                <div class="card-image">
+                    <!-- <img src="{{ pokemon.picture }}" alt="img"> -->
+                    <img [src]="pokemon.picture" alt="img">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>{{ pokemon.name }}</p>
+                        <p><small>{{ pokemon.created | date: "dd/MM/yy"}}</small></p>
+                        @for (type of pokemon.types; track $index) {
+                        <span class="{{ type | pokemonTypeColor }}">{{type}}</span>
+                        }
+                    </div>
+                </div>
+
+            </pkmnBorderCard>
+        </div>
+        }
+    </div>
+</div>
+}
+
+@else {
+
+}

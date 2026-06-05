@@ -1,0 +1,34 @@
+<h1 class="center">Pokémons favoris</h1>
+
+@if (pokemons) {
+    
+<div class="container">
+    <div class="row">
+        @for (pokemon of pokemons; track pokemon.id) {
+        <div class="col s6 m4">
+            <pkmnBorderCard class="card horizontal" (click)="selectPokemon(pokemon)">
+
+                <div class="card-image">
+                    <!-- <img src="{{ pokemon.picture }}" alt="img"> -->
+                    <img [src]="pokemon.picture" alt="img">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>{{ pokemon.name }}</p>
+                        <p><small>{{ pokemon.created | date: "dd/MM/yy"}}</small></p>
+                        @for (type of pokemon.types; track $index) {
+                        <span class="{{ type | pokemonTypeColor }}">{{type}}</span>
+                        }
+                    </div>
+                </div>
+
+            </pkmnBorderCard>
+        </div>
+        }
+    </div>
+</div>
+}
+
+@else {
+
+}

@@ -1,0 +1,116 @@
+@if (pokemon1.id && pokemon2.id) {
+<div class="row">
+    <div class="col s12 m10 offset-m1">
+        <h2 class="header center">Comparateur de Pokémon</h2>
+
+        <div class="row valign-wrapper">
+            <div class="col s12 m5">
+                <div class="card hoverable center-align">
+                    <a routerLink="/pokemon/{{ pokemon1.id }}" class="card-image">
+                        <img [src]="pokemon1.picture">
+                    </a>
+                    <div class="card-content">
+                        <p>{{ pokemon1.name }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col s12 m2 center-align">
+                <h4>VS</h4>
+            </div>
+
+            <div class="col s12 m5">
+                <div class="card hoverable center-align">
+                    <a routerLink="/pokemon/{{ pokemon2.id }}" class="card-image">
+                        <img [src]="pokemon2.picture">
+                    </a>
+                    <div class="card-content">
+                        <p>{{ pokemon2.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row valign-wrapper">
+            <div class="col s12 m5 center-align">
+                <strong>{{ pokemon1.hp }}</strong>
+            </div>
+            <div class="col s12 m2 center-align">
+                <strong>Point de vie</strong>
+            </div>
+            <div class="col s12 m5 center-align">
+                <strong>{{ pokemon2.hp }}</strong>
+            </div>
+        </div>
+
+        <div class="row valign-wrapper">
+            <div class="col s12 m5 center-align">
+                <strong>{{ pokemon1.cp }}</strong>
+            </div>
+            <div class="col s12 m2 center-align">
+                <strong>Dégâts</strong>
+            </div>
+            <div class="col s12 m5 center-align">
+                <strong>{{ pokemon2.cp }}</strong>
+            </div>
+        </div>
+
+
+        <div class="row valign-wrapper">
+            <div class="col s12 m5 center-align">
+                @for (type of pokemon1.types; track $index) {
+                <span class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+                }
+            </div>
+            <div class="col s12 m2 center-align">
+                <strong>Type</strong>
+            </div>
+            <div class="col s12 m5 center-align">
+                @for (type of pokemon2.types; track $index) {
+                <span class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+                }
+            </div>
+        </div>
+
+        <div class="row valign-wrapper">
+            <div class="col s12 m5 center-align">
+                <span class="rarity-stars">
+                    @for (r of pokemon1.rarity; track $index) {
+                    <pkmn-star [color]="pokemon1.rarity | pokemonRarity"></pkmn-star>
+                    }
+                </span>
+            </div>
+            <div class="col s12 m2 center-align">
+                <strong>Rareté</strong>
+            </div>
+            <div class="col s12 m5 center-align">
+                <span class="rarity-stars">
+                    @for (r of pokemon2.rarity; track $index) {
+                    <pkmn-star [color]="pokemon2.rarity | pokemonRarity"></pkmn-star>
+                    }
+                </span>
+            </div>
+        </div>
+
+        <div class="row valign-wrapper">
+            <div class="col s12 m5 center-align">
+                <strong>{{ pokemon1.created | date: 'dd/MM/yy' }}</strong>
+            </div>
+            <div class="col s12 m2 center-align">
+                <strong>Date de création</strong>
+            </div>
+            <div class="col s12 m5 center-align">
+                <strong>{{ pokemon2.created | date: 'dd/MM/yy' }}</strong>
+            </div>
+        </div>
+
+        <div class="center section">
+            <button type="button" (click)="goBack()" class="btn waves-effect waves-light grey darken-2">
+                <i class="material-icons left">arrow_back</i>Retour
+            </button>
+        </div>
+    </div>
+</div>
+}@else{
+<p class="center">Comparaison non trouvée</p>
+}
