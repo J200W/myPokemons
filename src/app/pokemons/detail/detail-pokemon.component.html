@@ -4,18 +4,20 @@
         <div class="row section">
             <div class="col s6 left-align">
                 <button (click)="goTo(pokemon.id - 1)"
-                    class="btn waves-effect waves-light teal darken-2">
+                    class="btn waves-effect waves-light btn-nintendo">
                     <i class="material-icons left">chevron_left</i>Précédent
                 </button>
             </div>
             <div class="col s6 right-align">
                 <button (click)="goTo(pokemon.id + 1)"
-                    class="btn waves-effect waves-light teal darken-2">
+                    class="btn waves-effect waves-light btn-nintendo">
                     Suivant<i class="material-icons right">chevron_right</i>
                 </button>
             </div>
         </div>
-        <h2 class="header center"> {{ pokemon.name }} </h2>
+        <div class="page-header">
+            <h2>{{ pokemon.name }}</h2>
+        </div>
         <div class="card horizontal hoverable">
             <div class="card-image">
                 <img [src]="pokemon.picture">
@@ -65,13 +67,13 @@
                     <div class="row">
                         <div class="col s12 m6 l3 center-align">
                             <button type="button" (click)="goBack()"
-                                class="btn waves-effect waves-light grey darken-2">
+                                class="btn waves-effect waves-light btn-nintendo-secondary">
                                 <i class="material-icons left">arrow_back</i>Retour
                             </button>
                         </div>
                         <div class="col s12 m6 l3 center-align">
                             <button type="button" (click)="toggleFavorite(pokemon)"
-                                class="btn waves-effect waves-light amber darken-2">
+                                class="btn waves-effect waves-light btn-nintendo-yellow">
                                 @if (pokemon.isFavorite) {
                                 <i class="material-icons left">favorite</i>Retirer 
                                 }
@@ -82,13 +84,13 @@
                         </div>
                         <div class="col s12 m6 l3 center-align">
                             <button type="button" (click)="goEdit(pokemon)"
-                                class="btn waves-effect waves-light orange darken-2">
+                                class="btn waves-effect waves-light btn-nintendo-blue">
                                 <i class="material-icons">edit</i>
                             </button>
                         </div>
                         <div class="col s12 m6 l3 center-align">
                             <button type="button" (click)="deletePokemon(pokemon)"
-                                class="btn waves-effect waves-light red darken-2">
+                                class="btn waves-effect waves-light btn-nintendo-danger">
                                 <i class="material-icons">delete</i></button>
                         </div>
                     </div>

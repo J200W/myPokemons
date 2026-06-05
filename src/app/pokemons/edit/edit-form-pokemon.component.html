@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col s8 offset-s2">
-            <div class="card-panel">
+            <div class="card-panel form-panel">
                 <div class="form-group">
                     <label for="name">Nom</label>
                     <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="pokemon.name"
@@ -70,8 +70,8 @@
         </div>
     </div>
     <div class="center section">
-        <button [disabled]="!pokemonForm.form.valid" class="btn waves-effect waves-light">Valider</button>
-        <a (click)="goBack()" class="btn waves-effect waves-light">Retour</a>
+        <button [disabled]="!pokemonForm.form.valid" class="btn waves-effect waves-light btn-nintendo">Valider</button>
+        <a (click)="goBack()" class="btn waves-effect waves-light btn-nintendo-secondary">Retour</a>
     </div>
 </form>
 

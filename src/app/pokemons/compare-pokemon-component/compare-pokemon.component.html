@@ -1,9 +1,11 @@
 @if (pokemon1.id && pokemon2.id) {
-<div class="row">
+<div class="container">
     <div class="col s12 m10 offset-m1">
-        <h2 class="header center">Comparateur de Pokémon</h2>
+        <div class="page-header">
+            <h2>Comparateur de Pokémon</h2>
+        </div>
 
-        <div class="row valign-wrapper">
+        <div class="row valign-wrapper section">
             <div class="col s12 m5">
                 <div class="card hoverable center-align">
                     <a routerLink="/pokemon/{{ pokemon1.id }}" class="card-image">
@@ -16,7 +18,7 @@
             </div>
 
             <div class="col s12 m2 center-align">
-                <h4>VS</h4>
+                <span class="nintendo-vs">VS</span>
             </div>
 
             <div class="col s12 m5">
@@ -31,7 +33,7 @@
             </div>
         </div>
 
-        <div class="row valign-wrapper">
+        <div class="row compare-stat-row valign-wrapper">
             <div class="col s12 m5 center-align">
                 <strong>{{ pokemon1.hp }}</strong>
             </div>
@@ -43,7 +45,7 @@
             </div>
         </div>
 
-        <div class="row valign-wrapper">
+        <div class="row compare-stat-row valign-wrapper">
             <div class="col s12 m5 center-align">
                 <strong>{{ pokemon1.cp }}</strong>
             </div>
@@ -55,8 +57,7 @@
             </div>
         </div>
 
-
-        <div class="row valign-wrapper">
+        <div class="row compare-stat-row valign-wrapper">
             <div class="col s12 m5 center-align">
                 @for (type of pokemon1.types; track $index) {
                 <span class="{{ type | pokemonTypeColor }}">{{ type }}</span>
@@ -72,7 +73,7 @@
             </div>
         </div>
 
-        <div class="row valign-wrapper">
+        <div class="row compare-stat-row valign-wrapper">
             <div class="col s12 m5 center-align">
                 <span class="rarity-stars">
                     @for (r of pokemon1.rarity; track $index) {
@@ -92,7 +93,7 @@
             </div>
         </div>
 
-        <div class="row valign-wrapper">
+        <div class="row compare-stat-row valign-wrapper">
             <div class="col s12 m5 center-align">
                 <strong>{{ pokemon1.created | date: 'dd/MM/yy' }}</strong>
             </div>
@@ -105,12 +106,12 @@
         </div>
 
         <div class="center section">
-            <button type="button" (click)="goBack()" class="btn waves-effect waves-light grey darken-2">
+            <button type="button" (click)="goBack()" class="btn waves-effect waves-light btn-nintendo-secondary">
                 <i class="material-icons left">arrow_back</i>Retour
             </button>
         </div>
     </div>
 </div>
-}@else{
-<p class="center">Comparaison non trouvée</p>
+} @else {
+<p class="center auth-hint">Comparaison non trouvée</p>
 }

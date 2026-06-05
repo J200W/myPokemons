@@ -1,4 +1,338 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   MyPokemons — Thème Nintendo
+   Rouge #E60012 · Bleu Joy-Con · Jaune · Gris anthracite
+   ============================================================ */
+
+:root {
+  --nintendo-red: #e60012;
+  --nintendo-red-dark: #b8000e;
+  --nintendo-red-light: #ff1a2e;
+  --nintendo-red-soft: #fff0f1;
+  --nintendo-blue: #0084d1;
+  --nintendo-blue-dark: #006aa8;
+  --nintendo-yellow: #ffc400;
+  --nintendo-yellow-dark: #e6b000;
+  --nintendo-white: #ffffff;
+  --nintendo-gray-100: #f5f5f7;
+  --nintendo-gray-200: #e8e8ed;
+  --nintendo-gray-400: #9e9ea7;
+  --nintendo-gray-700: #3d3d3d;
+  --nintendo-gray-900: #1a1a1a;
+  --nintendo-radius: 14px;
+  --nintendo-radius-sm: 10px;
+  --nintendo-shadow: 0 6px 24px rgba(26, 26, 26, 0.08);
+  --nintendo-shadow-red: 0 8px 28px rgba(230, 0, 18, 0.18);
+  --font-display: 'Fredoka', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--nintendo-gray-900);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(230, 0, 18, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(0, 132, 209, 0.06) 0%, transparent 45%),
+    linear-gradient(180deg, var(--nintendo-gray-100) 0%, var(--nintendo-gray-200) 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6,
+.header,
+.brand-logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* --- Navigation & layout --- */
+
+.main-content {
+  padding: 2rem 0 4rem;
+  min-height: calc(100vh - 64px - 72px);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1,
+.page-header h2 {
+  color: var(--nintendo-gray-900);
+  margin: 0 0 0.5rem;
+  font-size: 2.2rem;
+}
+
+.page-header::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 5px;
+  margin: 0.75rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--nintendo-red), var(--nintendo-yellow), var(--nintendo-blue));
+}
+
+/* --- Boutons Nintendo --- */
+
+.btn {
+  font-family: var(--font-display);
+  font-weight: 500;
+  border-radius: 999px !important;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  box-shadow: var(--nintendo-shadow) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease !important;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-nintendo,
+.btn.teal,
+.btn.teal.darken-2,
+.btn:not([class*="darken"]):not([class*="lighten"]):not(.btn-flat):not(.btn-nintendo-secondary):not(.btn-nintendo-blue):not(.btn-nintendo-yellow):not(.btn-nintendo-danger) {
+  background-color: var(--nintendo-red) !important;
+}
+
+.btn-nintendo:hover,
+.btn.teal:hover,
+.btn.teal.darken-2:hover {
+  background-color: var(--nintendo-red-dark) !important;
+  box-shadow: var(--nintendo-shadow-red) !important;
+}
+
+.btn-nintendo-secondary,
+.btn.grey,
+.btn.grey.darken-2 {
+  background-color: var(--nintendo-gray-700) !important;
+}
+
+.btn-nintendo-secondary:hover,
+.btn.grey.darken-2:hover {
+  background-color: var(--nintendo-gray-900) !important;
+}
+
+.btn-nintendo-blue,
+.btn.blue,
+.btn.blue.darken-2 {
+  background-color: var(--nintendo-blue) !important;
+}
+
+.btn-nintendo-blue:hover,
+.btn.blue.darken-2:hover {
+  background-color: var(--nintendo-blue-dark) !important;
+}
+
+.btn-nintendo-yellow,
+.btn.amber,
+.btn.amber.darken-2,
+.btn.orange,
+.btn.orange.darken-2 {
+  background-color: var(--nintendo-yellow) !important;
+  color: var(--nintendo-gray-900) !important;
+}
+
+.btn-nintendo-yellow:hover,
+.btn.amber.darken-2:hover {
+  background-color: var(--nintendo-yellow-dark) !important;
+}
+
+.btn-nintendo-danger,
+.btn.red,
+.btn.red.darken-2 {
+  background-color: var(--nintendo-red-dark) !important;
+}
+
+.btn-flat {
+  color: var(--nintendo-red) !important;
+  box-shadow: none !important;
+}
+
+.btn-flat:hover {
+  background-color: var(--nintendo-red-soft) !important;
+}
+
+/* --- Cartes Pokémon --- */
+
+.card,
+.card-panel {
+  border-radius: var(--nintendo-radius) !important;
+  box-shadow: var(--nintendo-shadow) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  overflow: hidden;
+}
+
+.card.hoverable:hover,
+.collection-item:hover {
+  box-shadow: var(--nintendo-shadow-red) !important;
+}
+
+.card .card-content p {
+  font-weight: 600;
+  color: var(--nintendo-gray-900);
+}
+
+.card .card-image img {
+  object-fit: contain;
+  background: var(--nintendo-gray-100);
+  padding: 0.5rem;
+}
+
+.card-action {
+  border-top: 2px solid var(--nintendo-gray-200) !important;
+  background: var(--nintendo-gray-100);
+}
+
+table.bordered.striped tbody tr:nth-child(odd) {
+  background-color: var(--nintendo-red-soft);
+}
+
+table.bordered.striped tbody tr td:first-child {
+  color: var(--nintendo-gray-700);
+  font-weight: 600;
+}
+
+/* --- Recherche --- */
+
+.nintendo-search .input-field input {
+  border-radius: var(--nintendo-radius-sm);
+  padding: 0 1rem !important;
+  background: var(--nintendo-white);
+  border: 2px solid var(--nintendo-gray-200) !important;
+  box-shadow: var(--nintendo-shadow);
+  height: 3rem !important;
+  box-sizing: border-box;
+}
+
+.nintendo-search .input-field input:focus {
+  border-color: var(--nintendo-red) !important;
+  box-shadow: 0 0 0 3px rgba(230, 0, 18, 0.15) !important;
+}
+
+.nintendo-search .collection {
+  border-radius: var(--nintendo-radius);
+  border: none;
+  box-shadow: var(--nintendo-shadow);
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.nintendo-search .collection-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, padding-left 0.15s ease;
+}
+
+.nintendo-search .collection-item:hover {
+  background-color: var(--nintendo-red-soft) !important;
+  padding-left: 1.5rem !important;
+}
+
+.nintendo-search .collection-item img {
+  width: 36px !important;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--nintendo-gray-100);
+}
+
+/* --- Auth --- */
+
+.auth-page {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.auth-card {
+  background: var(--nintendo-white);
+  border-radius: var(--nintendo-radius);
+  box-shadow: var(--nintendo-shadow);
+  padding: 2rem;
+  border-top: 5px solid var(--nintendo-red);
+}
+
+.auth-hint {
+  text-align: center;
+  color: var(--nintendo-gray-700);
+  background: var(--nintendo-red-soft);
+  border-radius: var(--nintendo-radius-sm);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.auth-card label {
+  font-weight: 700;
+  color: var(--nintendo-gray-700);
+}
+
+.auth-card input {
+  border-radius: var(--nintendo-radius-sm) !important;
+  border: 2px solid var(--nintendo-gray-200) !important;
+  padding: 0 0.75rem !important;
+  height: 2.75rem !important;
+  box-sizing: border-box;
+}
+
+.auth-card input:focus {
+  border-color: var(--nintendo-red) !important;
+  box-shadow: 0 0 0 3px rgba(230, 0, 18, 0.12) !important;
+}
+
+.auth-error {
+  background: var(--nintendo-red) !important;
+  color: var(--nintendo-white) !important;
+  border-radius: var(--nintendo-radius-sm) !important;
+  padding: 0.75rem 1rem !important;
+  margin-top: 0.75rem;
+}
+
+/* --- Comparateur --- */
+
+.nintendo-vs {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--nintendo-red), var(--nintendo-red-dark));
+  color: var(--nintendo-white);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  box-shadow: var(--nintendo-shadow-red);
+}
+
+.compare-stat-row {
+  background: var(--nintendo-white);
+  border-radius: var(--nintendo-radius-sm);
+  padding: 0.75rem 0;
+  margin-bottom: 0.5rem;
+  box-shadow: var(--nintendo-shadow);
+}
+
+.compare-stat-row:nth-child(even) {
+  background: var(--nintendo-red-soft);
+}
+
+/* --- Favoris / étoiles --- */
 
 .star-icon {
   width: 2rem;
@@ -15,4 +349,103 @@
 .rarity-stars .star-icon {
   width: 2.5rem;
   height: 2.5rem;
+}
+
+/* --- Page 404 --- */
+
+.not-found-page {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.not-found-page img {
+  max-width: 200px;
+  filter: drop-shadow(0 8px 20px rgba(230, 0, 18, 0.2));
+}
+
+.not-found-page h1 {
+  color: var(--nintendo-red);
+  margin-top: 1.5rem;
+}
+
+/* --- Utilisateur connecté dans la nav --- */
+
+.nav-user-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 0 1rem !important;
+  font-weight: 600;
+}
+
+.nav-user-badge .material-icons {
+  font-size: 1.1rem;
+}
+
+/* --- Chips types Pokémon (Materialize) --- */
+
+[class*="lighten"],
+.deep-orange,
+.grey {
+  border-radius: 999px !important;
+  font-weight: 700;
+  font-size: 0.8rem !important;
+}
+
+/* --- Formulaires --- */
+
+.form-panel {
+  background: var(--nintendo-white);
+  border-radius: var(--nintendo-radius);
+  border-top: 4px solid var(--nintendo-blue);
+  box-shadow: var(--nintendo-shadow);
+}
+
+.form-panel label {
+  font-weight: 700;
+  color: var(--nintendo-gray-700);
+}
+
+.form-panel input:not([type="checkbox"]) {
+  border-radius: var(--nintendo-radius-sm) !important;
+  border: 2px solid var(--nintendo-gray-200) !important;
+  padding: 0 0.75rem !important;
+  height: 2.75rem !important;
+  box-sizing: border-box;
+}
+
+.form-panel input:focus {
+  border-color: var(--nintendo-blue) !important;
+  box-shadow: 0 0 0 3px rgba(0, 132, 209, 0.15) !important;
+}
+
+.form-panel .card-panel.red.accent-3 {
+  background-color: var(--nintendo-red-soft) !important;
+  color: var(--nintendo-red-dark) !important;
+  border-left: 4px solid var(--nintendo-red);
+  border-radius: var(--nintendo-radius-sm) !important;
+}
+
+/* --- Actions bar liste --- */
+
+.actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.actions-bar .btn {
+  margin: 0;
+}
+
+.form-preview-img {
+  max-width: 180px;
+  border-radius: var(--nintendo-radius);
+  background: var(--nintendo-white);
+  padding: 1rem;
+  box-shadow: var(--nintendo-shadow);
 }

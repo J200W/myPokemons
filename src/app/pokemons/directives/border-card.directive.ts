@@ -5,11 +5,11 @@ import { Directive, ElementRef, HostListener, Input } from "@angular/core";
   standalone: true
 })
 export class BorderCardDirective{
-  private initialColor: string = '#f5f5f5';
-  private defaultColor: string = '#009686';
+  private initialColor: string = '#e8e8ed';
+  private defaultColor: string = '#e60012';
 
   private initialBgColor: string = '#ffffff';
-  private defaultBgColor: string = '#009686';
+  private defaultBgColor: string = '#fff0f1';
 
   private defaultHeight: number = 200;
   private _selected = false;

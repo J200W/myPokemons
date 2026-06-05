@@ -1,17 +1,18 @@
-<div class="row">
-  <div class="col s8 offset-s2">
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" 
-               id="autocomplete-input" 
-               class="autocomplete" 
-               placeholder="Chercher un pokemon" (keyup)="search(searchbox.value)" #searchbox>
+<div class="container nintendo-search section">
+  <div class="row">
+    <div class="col s12 m8 offset-m2">
+      <div class="input-field">
+        <input type="text"
+               id="autocomplete-input"
+               class="autocomplete"
+               placeholder="Chercher un Pokémon..."
+               (keyup)="search(searchbox.value)" #searchbox>
       </div>
 
       <div class="collection">
         @for (pokemon of pokemons | async ; track $index) {
           <a (click)="goToDetail(pokemon)" class="collection-item">
-            <img [src]="pokemon.picture" style="width: 30px;"> {{ pokemon.name }}
+            <img [src]="pokemon.picture" alt=""> {{ pokemon.name }}
           </a>
         }
       </div>

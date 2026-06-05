@@ -1,7 +1,11 @@
-<h2 class="hear center">Ajouter un Pokémon</h2>
+<div class="container">
+    <div class="page-header">
+        <h2>Ajouter un Pokémon</h2>
+    </div>
 
 <p class="center">
-    <img [src]="pokemon.picture">
+    <img [src]="pokemon.picture" class="form-preview-img" alt="">
 </p>
 
-<add-form-pokemon [pokemon]="pokemon"></add-form-pokemon>
+    <add-form-pokemon [pokemon]="pokemon"></add-form-pokemon>
+</div>

@@ -1,7 +1,11 @@
-<h2 class="hear center">Editer {{pokemon?.name }}</h2>
+<div class="container">
+    <div class="page-header">
+        <h2>Éditer {{ pokemon?.name }}</h2>
+    </div>
 
-<p class="center">
-    <img [src]="pokemon.picture">
-</p>
+    <p class="center">
+        <img [src]="pokemon.picture" class="form-preview-img" alt="">
+    </p>
 
-<edit-form-pokemon [pokemon]="pokemon"></edit-form-pokemon>
+    <edit-form-pokemon [pokemon]="pokemon"></edit-form-pokemon>
+</div>

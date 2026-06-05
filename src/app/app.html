@@ -1,9 +1,15 @@
-<nav>
-    <div class="nav-wrapper teal">
-        <a routerLink="/pokemon/all" class="brand-logo center">Application de Pokémons</a>
+<nav class="nintendo-nav">
+    <div class="nav-wrapper container">
+        <a routerLink="/pokemon/all" class="brand-logo">
+            <span class="brand-pokeball" aria-hidden="true"></span>
+            MyPokédex
+        </a>
         <ul class="right hide-on-med-and-down">
             @if (authService.currentUser$ | async; as user) {
-            <li><span>{{ user.username }}</span></li>
+            <li class="nav-user-badge">
+                <i class="material-icons">person</i>
+                <span>{{ user.username }}</span>
+            </li>
             <li><a (click)="logout()">Déconnexion</a></li>
             } @else {
             <li><a routerLink="/login">Connexion</a></li>
@@ -13,4 +19,12 @@
     </div>
 </nav>
 
-<router-outlet />
+<main class="main-content">
+    <router-outlet />
+</main>
+
+<footer class="nintendo-footer">
+    <div class="container center-align">
+        <p><strong>Nintendo</strong> inspired · MyPokemons</p>
+    </div>
+</footer>
