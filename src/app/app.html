@@ -1,6 +1,15 @@
 <nav>
     <div class="nav-wrapper teal">
-        <a routerLink="/" class="brand-logo center">Application de Pokémons</a>
+        <a routerLink="/pokemon/all" class="brand-logo center">Application de Pokémons</a>
+        <ul class="right hide-on-med-and-down">
+            @if (authService.currentUser$ | async; as user) {
+            <li><span>{{ user.username }}</span></li>
+            <li><a (click)="logout()">Déconnexion</a></li>
+            } @else {
+            <li><a routerLink="/login">Connexion</a></li>
+            <li><a routerLink="/register">Inscription</a></li>
+            }
+        </ul>
     </div>
 </nav>
 

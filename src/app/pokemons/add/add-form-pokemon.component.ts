@@ -56,7 +56,7 @@ export class AddFormPokemonComponent implements OnInit {
             return false;
         }
 
-        return true
+        return true;
     }
 
 

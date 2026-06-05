@@ -63,19 +63,18 @@ export class EditFormPokemonComponent implements OnInit{
 
   
 
-  onSubmit(){
+  onSubmit() {
+    this.pokemon.hp = Number(this.pokemon.hp);
+    this.pokemon.cp = Number(this.pokemon.cp);
 
-    this.pokemonsService.updatePokemon(this.pokemon).subscribe( () => 
-      this.router.navigate(['pokemon', this.pokemon.id])
-    )
-
-    let link= ['pokemon', this.pokemon.id];
-    this.router.navigate(link);
+    this.pokemonsService.updatePokemon(this.pokemon).subscribe((updated) => {
+      const id = updated?.id ?? this.pokemon.id;
+      this.router.navigate(['/pokemon', id]);
+    });
   }
 
-  goBack(){
-    let link= ['pokemon', this.pokemon.id];
-    this.router.navigate(link);
+  goBack() {
+    this.router.navigate(['/pokemon', this.pokemon.id]);
   }
 
 }
